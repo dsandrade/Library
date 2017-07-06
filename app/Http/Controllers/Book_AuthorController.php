@@ -4,6 +4,8 @@ namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Library\Book_Author;
+
 class Book_AuthorController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class Book_AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $book_authors = Book_Author::with('books', 'authors')->get();
+
+        return view('admin.book_authors.index')->with(compact('book_authors'));
     }
 
     /**

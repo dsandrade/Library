@@ -4,6 +4,8 @@ namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Library\User;
+
 class UserController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return view('admin.users.index')->with(compact('users'));
     }
 
     /**

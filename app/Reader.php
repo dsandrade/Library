@@ -11,4 +11,10 @@ class Reader extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
+
 }

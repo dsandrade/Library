@@ -4,6 +4,8 @@ namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Library\Author;
+
 class AuthorController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::all();
+
+        return view('admin.authors.index')->with(compact('authors'));
     }
 
     /**

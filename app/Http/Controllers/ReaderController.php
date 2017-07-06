@@ -4,6 +4,8 @@ namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Library\Reader;
+
 class ReaderController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class ReaderController extends Controller
      */
     public function index()
     {
-        //
+        $readers = Reader::all();
+
+        return view('admin.readers.index')->with(compact('readers'));
     }
 
     /**

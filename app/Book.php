@@ -15,4 +15,20 @@ class Book extends Model
         'description',
         'isbn',
     ];
+
+    public function book_authors()
+    {
+        return $this->hasMany(Book_Author::class);
+    }
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
+
+    public function publishers()
+    {
+        return $this->belongsTo(Publisher::class, 'id');
+    }
+
 }

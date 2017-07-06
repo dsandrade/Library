@@ -4,6 +4,8 @@ namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Library\Publisher;
+
 class PublisherController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        //
+        $publishers = Publisher::all();
+
+        return view('admin.publishers.index')->with(compact('publishers'));
     }
 
     /**

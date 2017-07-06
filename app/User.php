@@ -14,4 +14,9 @@ class User extends Model
         'password',
     ];
 
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
+
 }

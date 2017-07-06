@@ -4,6 +4,8 @@ namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Library\Loan;
+
 class LoanController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class LoanController extends Controller
      */
     public function index()
     {
-        //
+        $loans = Loan::all();
+
+        return view('admin.loans.index')->with(compact('loans'));
     }
 
     /**

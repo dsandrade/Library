@@ -18,4 +18,26 @@ class Loan extends Model
         'canceled_at',
         'user_id',
     ];
+
+    protected $casts = [
+        'withdrawal_at' => 'date',
+        'return_date' => 'date',
+        'returned_at' => 'date',
+        'canceled_at' => 'date',
+    ];
+
+    public function books()
+    {
+        return $this->belongsTo(Book::class, 'id');
+    }
+
+    public function readers()
+    {
+        return $this->belongsTo(Reader::class, 'id');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'id');
+    }
 }

@@ -5,6 +5,7 @@ namespace Library\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Library\Book;
+use Library\Http\Requests\BookFormRequest;
 
 class BookController extends Controller
 {
@@ -15,7 +16,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::with('publishers')->get();
+        $books = Book::with('publishers')->orderBy('title')->get();
 
         return view('admin.books.index')->with(compact('books'));
     }
@@ -27,7 +28,11 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $publishersForSelect = Book::with('publishers')
+            ->get()
+            ->pluck('publishers.name', 'publishers.id');
+
+        return view('admin.books.create')->with(compact('publishersForSelect'));
     }
 
     /**
@@ -36,9 +41,21 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookFormRequest $request)
     {
-        //
+        $book = new Book;
+
+        $book->publisher_id = $request->publisher_id;
+        $book->title = $request->title;
+        $book->description = $request->description;
+        $book->isbn = $request->isbn;
+
+        $book->save();
+
+        return redirect()
+            ->route('livros.index')
+            ->with(['success' => 'Leitor salvo com sucesso!']);
+
     }
 
     /**
@@ -70,7 +87,7 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BookFormRequest $request, $id)
     {
         //
     }

@@ -5,6 +5,7 @@ namespace Library\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Library\Author;
+use Library\Http\Requests\AuthorFormRequest;
 
 class AuthorController extends Controller
 {
@@ -15,7 +16,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
+        $authors = Author::orderBy('name', 'ASC')->get();
 
         return view('admin.authors.index')->with(compact('authors'));
     }
@@ -27,7 +28,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.authors.create');
     }
 
     /**
@@ -36,9 +37,17 @@ class AuthorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AuthorFormRequest $request)
     {
-        //
+        $author = new Author;
+
+        $author->name = $request->name;
+
+        $author->save();
+
+        return redirect()
+            ->route('autores.index')
+            ->with(['success' => 'Autor salvo com sucesso!']);
     }
 
     /**
@@ -60,7 +69,9 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $author = Author::find($id);
+
+        return view('admin.authors.edit')->with(compact('author'));
     }
 
     /**
@@ -70,9 +81,17 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AuthorFormRequest $request, $id)
     {
-        //
+        $author = Author::find($id);
+
+        $author->fill($request->only('name'));
+
+        $author->save();
+
+        return redirect()
+            ->route('autores.edit', $id)
+            ->with(['success' => 'Autor editado com sucesso!']);
     }
 
     /**
@@ -83,6 +102,12 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $author = Author::find($id);
+
+        $author->delete();
+
+        return redirect()
+            ->route('autores.index')
+            ->with(['success' => 'Autor deletado com sucesso!']);
     }
 }

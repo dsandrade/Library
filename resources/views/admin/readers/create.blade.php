@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-title')
-    Criar Usuário
+    Criar Leitor
 @endsection
 
 @section('content')
@@ -16,8 +16,8 @@
         </div>
     @endif
 
-    {!! Form::open(['route' => 'clientes.store']) !!}
+    {!! Form::open(['route' => 'leitores.store']) !!}
     <input type="hidden" name="_method" value="POST">
-        @include('admin.users.partials.form')
+    @include('admin.readers.partials.form')
     {!! Form::close() !!}
 @endsection

@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('name', 'ASC')->orderBy('login', 'DESC')->get();
 
         return view('admin.users.index')->with(compact('users'));
     }
@@ -27,7 +27,6 @@ class UserController extends Controller
      */
     public function create()
     {
-
         return view('admin.users.create');
     }
 
@@ -94,7 +93,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('clientes.edit', $id)
-            ->with(['success' => 'Cliente salvo com sucesso!']);
+            ->with(['success' => 'Cliente editado com sucesso!']);
     }
 
     /**

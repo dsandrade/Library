@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-title')
-    Editar Usuário
+    Editar Autor
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
         <div class="alert alert-danger">
             <ul>
                 @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -22,8 +22,8 @@
         </div>
     @endif
 
-    {!! Form::model($user, ['route' => ['clientes.update', $user->id]]) !!}
+    {!! Form::model($author, ['route' => ['autores.update', $author->id]]) !!}
     <input type="hidden" name="_method" value="PUT">
-        @include('admin.users.partials.form')
+    @include('admin.authors.partials.form')
     {!! Form::close() !!}
 @endsection

@@ -3,8 +3,8 @@
 namespace Library\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Library\User;
+use Library\Http\Requests\UserFormRequest;
 
 class UserController extends Controller
 {
@@ -27,7 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('admin.users.create');
     }
 
     /**
@@ -36,9 +37,20 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserFormRequest $request)
     {
-        //
+
+        $user = new User;
+
+        $user->name = $request->name;
+        $user->login = $request->login;
+        $user->password = $request->password;
+
+        $user->save();
+
+        return redirect()
+            ->route('clientes.index')
+            ->with(['success' => 'Cliente salvo com sucesso!']);
     }
 
     /**
@@ -60,7 +72,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('admin.users.edit')->with(compact('user'));
     }
 
     /**
@@ -70,9 +84,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserFormRequest $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->fill($request->only('name', 'login', 'password'));
+
+        $user->save();
+
+        return redirect()
+            ->route('clientes.edit', $id)
+            ->with(['success' => 'Cliente salvo com sucesso!']);
     }
 
     /**
@@ -83,6 +105,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        $user->delete();
+
+        return redirect()
+            ->route('clientes.index')
+            ->with(['success' => 'Cliente deletado com sucesso!']);
     }
 }

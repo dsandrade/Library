@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use Library\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
@@ -13,6 +14,14 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')
+            ->insert([
+                'name' => 'Daniel',
+                'login' => 'dandrade',
+                'password' => Hash::make('dandrade'),
+            ]);
+
         factory(User::class, 50)->create();
+
     }
 }

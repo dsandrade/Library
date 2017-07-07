@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-title')
-    Editar Livro
+    Editar Autor do Livro
 @endsection
 
 @section('content')
@@ -21,8 +21,8 @@
             {{ Session::get('success') }}
         </div>
     @endif
-    {!! Form::model($book->first(), ['route' => ['livros.update', $book->first()->id]]) !!}
+    {!! Form::model($book_author->first(), ['route' => ['livrosautores.update', $book_author->first()->id]]) !!}
     <input type="hidden" name="_method" value="PUT">
-    @include('admin.books.partials.form')
+    @include('admin.book_authors.partials.form')
     {!! Form::close() !!}
 @endsection

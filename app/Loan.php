@@ -26,18 +26,18 @@ class Loan extends Model
         'canceled_at' => 'date',
     ];
 
-    public function books()
+    public function book()
     {
-        return $this->belongsTo(Book::class, 'id');
+        return $this->belongsTo(Book::class, 'book_id');
     }
 
-    public function readers()
+    public function reader()
     {
-        return $this->belongsTo(Reader::class, 'id');
+        return $this->belongsTo(Reader::class, 'reader_id');
     }
 
-    public function users()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

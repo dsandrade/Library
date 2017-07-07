@@ -26,9 +26,9 @@ class Book extends Model
         return $this->hasMany(Loan::class);
     }
 
-    public function publishers()
+    public function publisher()
     {
-        return $this->belongsTo(Publisher::class, 'id');
+        return $this->belongsTo(Publisher::class, 'publisher_id');
     }
 
 }

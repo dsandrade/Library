@@ -5,10 +5,17 @@ namespace Library\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Library\Book;
+use Library\Publisher;
 use Library\Http\Requests\BookFormRequest;
 
 class BookController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::with('publishers')->orderBy('title')->get();
+        $books = Book::with('publisher')->get();
 
         return view('admin.books.index')->with(compact('books'));
     }
@@ -28,9 +35,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        $publishersForSelect = Book::with('publishers')
+        $publishersForSelect = Publisher::orderBy('name')
             ->get()
-            ->pluck('publishers.name', 'publishers.id');
+            ->pluck('name', 'id');
 
         return view('admin.books.create')->with(compact('publishersForSelect'));
     }
@@ -54,8 +61,7 @@ class BookController extends Controller
 
         return redirect()
             ->route('livros.index')
-            ->with(['success' => 'Leitor salvo com sucesso!']);
-
+            ->with(['success' => 'Livro salvo com sucesso!']);
     }
 
     /**
@@ -77,7 +83,15 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = Book::with('publisher')
+            ->where('books.id', $id)
+            ->get();
+
+        $publishersForSelect = Book::with('publisher')
+            ->get()
+            ->pluck('publisher.name', 'publisher.id');
+
+        return view('admin.books.edit')->with(compact('book', 'publishersForSelect'));
     }
 
     /**
@@ -89,7 +103,15 @@ class BookController extends Controller
      */
     public function update(BookFormRequest $request, $id)
     {
-        //
+        $book = Book::find($id);
+
+        $book->fill($request->only('publisher_id', 'title', 'description', 'isbn'));
+
+        $book->save();
+
+        return redirect()
+            ->route('livros.edit', $id)
+            ->with(['success' => 'Autor editado com sucesso!']);
     }
 
     /**
@@ -100,6 +122,12 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::find($id);
+
+        $book->delete();
+
+        return redirect()
+            ->route('livros.index')
+            ->with(['success' => 'Autor deletado com sucesso!']);
     }
 }

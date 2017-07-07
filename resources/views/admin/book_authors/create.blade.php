@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-title')
-    Editar Livro
+    Criar Autor para Livro
 @endsection
 
 @section('content')
@@ -16,13 +16,8 @@
         </div>
     @endif
 
-    @if(Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
-    {!! Form::model($book->first(), ['route' => ['livros.update', $book->first()->id]]) !!}
-    <input type="hidden" name="_method" value="PUT">
-    @include('admin.books.partials.form')
+    {!! Form::open(['route' => 'livrosautores.store']) !!}
+    <input type="hidden" name="_method" value="POST">
+    @include('admin.book_authors.partials.form')
     {!! Form::close() !!}
 @endsection

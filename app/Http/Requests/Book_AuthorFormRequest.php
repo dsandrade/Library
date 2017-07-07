@@ -24,16 +24,16 @@ class Book_AuthorFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'book' => 'required',
-            'author' => 'required',
+            'book_id' => 'required',
+            'author_id' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'book.required' => 'O campo livro é obrigatório',
-            'author.required' => 'O campo autor é obrigatório',
+            'book_id.required' => 'O campo livro é obrigatório',
+            'author_id.required' => 'O campo autor é obrigatório',
         ];
     }
 }

@@ -9,6 +9,12 @@ use Library\Http\Requests\ReaderFormRequest;
 
 class ReaderController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -4,6 +4,7 @@ namespace Library\Http\Controllers\Auth;
 
 use Library\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/clientes';
 
     /**
      * Create a new controller instance.
@@ -36,4 +37,23 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function username()
+    {
+        return 'login';
+    }
+
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $errors = [$this->username() => trans('auth.failed')];
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
+    }
+
 }

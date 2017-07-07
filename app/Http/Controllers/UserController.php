@@ -5,9 +5,16 @@ namespace Library\Http\Controllers;
 use Illuminate\Http\Request;
 use Library\User;
 use Library\Http\Requests\UserFormRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,14 +45,9 @@ class UserController extends Controller
      */
     public function store(UserFormRequest $request)
     {
+        $request['password'] = Hash::make($request->password);
 
-        $user = new User;
-
-        $user->name = $request->name;
-        $user->login = $request->login;
-        $user->password = $request->password;
-
-        $user->save();
+        User::create($request->all());
 
         return redirect()
             ->route('clientes.index')

@@ -35,12 +35,9 @@
         </tr>
         </thead>
         <tbody>
-        {{ dd($books) }}
         @foreach($books as $book)
             <tr width="1%" nowrap>
-                {{var_dump($book->publishers['name'])}}
-                {{ var_dump($trab++) }}
-                <td>{{ $book->publishers['name'] }}</td>
+                <td>{{ $book->publisher->name }}</td>
                 <td>{{ $book->title }}</td>
                 <td>{{ $book->description }}</td>
                 <td>{{ $book->isbn }}</td>

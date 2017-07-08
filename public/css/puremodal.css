@@ -1,0 +1,155 @@
+/* [Object] Modal
+ * =============================== */
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}
+
+.puremodal {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  background: rgba(0,0,0, .9);
+  transition: opacity .25s ease;
+  z-index: 999999;
+}
+
+.puremodal__bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.puremodal-state {
+  display: none;
+}
+
+.puremodal-state:checked + .puremodal {
+  opacity: 1;
+  visibility: visible;
+}
+
+.puremodal-state:checked + .puremodal .puremodal__inner {
+  top: 0;
+}
+
+.puremodal__inner {
+  transition: top .25s ease;
+  position: absolute;
+  top: -20%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  margin: auto;
+  overflow: auto;
+  background: #fff;
+  border-radius: 5px;
+  padding: 1em 2em;
+  height: 50%;
+}
+
+.puremodal__inner-small {
+  height: 30%;
+}
+
+.puremodal__close {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  width: 1.1em;
+  height: 1.1em;
+  cursor: pointer;
+}
+
+.puremodal__close:after,
+.puremodal__close:before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 1.5em;
+  background: #ccc;
+  display: block;
+  transform: rotate(45deg);
+  left: 50%;
+  margin: -3px 0 0 -1px;
+  top: 0;
+}
+
+.puremodal__close:hover:after,
+.puremodal__close:hover:before {
+  background: #aaa;
+}
+
+.puremodal__close:before {
+  transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 768px) {
+
+  .puremodal__inner {
+    width: 90%;
+    height: 90%;
+    box-sizing: border-box;
+  }
+}
+
+.btnmodal {
+  cursor: pointer;
+  background: #27ae60;
+  display: inline-block;
+  padding: .5em 1em;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.btnmodal:hover,
+.btnmodal:focus {
+  background: #2ecc71;
+}
+
+.btnmodal:active {
+  background: #27ae60;
+  box-shadow: 0 1px 2px rgba(0,0,0, .2) inset;
+}
+
+.btnmodal--blue {
+  background: #2980b9;
+}
+
+.btnmodal--blue:hover,
+.btnmodal--blue:focus {
+  background: #3498db;
+}
+
+.btnmodal--blue:active {
+  background: #2980b9;
+}
+
+.btnmodal--red {
+  background: #d9534f;
+}
+
+.btnmodal--red:hover,
+.btnmodal--red:focus {
+  background: #d43f3a;
+}
+
+.btnmodal--red:active {
+  background: #d9534f;
+}
+
+p img {
+  max-width: 200px;
+  height: auto;
+  float: left;
+  margin: 0 1em 1em 0;
+}

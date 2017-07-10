@@ -5,21 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                Livros / Autores <small>Painel de livros e autores</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <i class="fa fa-dashboard"></i> Painel
-                </li>
-                <li class="active">
-                    <i class="fa fa-bookmark"></i> Livros / Autores
-                </li>
-            </ol>
-        </div>
-    </div>
+
+    @include('admin.book_authors.partials.description')
 
     @if(count($errors->all()) > 0)
         <div class="alert alert-danger">
@@ -37,7 +24,7 @@
         </div>
     @endif
 
-    <a href="{{ route('livrosautores.create') }}" class="btn btn-xs btn-default">criar</a>
+    <a href="{{ route('livrosautores.create') }}" class="btn btn-success">Criar</a>
 
     <div class="row">
         <div class="col-lg-12">
@@ -57,10 +44,10 @@
                             <td>{{ $book_author->book->title }}</td>
                             <td>{{ $book_author->author->name }}</td>
                             <td>
-                                <a href="{{ route('livrosautores.edit', $book_author->id) }}" class="btn btn-xs btn-default">editar</a>
+                                <a href="{{ route('livrosautores.edit', $book_author->id) }}" class="btn btn-primary">Editar</a>
                                 {{ Form::model($book_author, ['route' => ['livrosautores.destroy', $book_author->id]]) }}
                                 {{ Form::hidden('_method', 'DELETE') }}
-                                {{ Form::submit('excluir', ['class' => 'btn btn-xs btn-default']) }}
+                                {{ Form::submit('Excluir', ['class' => 'btn btn-danger']) }}
                                 {{ Form::close() }}
                             </td>
                         </tr>

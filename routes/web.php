@@ -27,5 +27,8 @@ Route::prefix('admin')->group(function() {
     Route::resource('editoras', 'PublisherController');
     Route::resource('livros', 'BookController');
     Route::resource('livrosautores', 'Book_AuthorController');
+    Route::POST('emprestimos/option', 'LoanController@option')->name('emprestimos.option');
     Route::resource('emprestimos', 'LoanController');
+    Route::GET('relatorios', 'ReportController@index')->name('relatorios.index');
+    Route::POST('relatorios', 'ReportController@option')->name('relatorios.option');
 });

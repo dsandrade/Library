@@ -6,21 +6,7 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                Livros <small>Painel de livros</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <i class="fa fa-dashboard"></i> Painel
-                </li>
-                <li class="active">
-                    <i class="fa fa-book"></i> Livros
-                </li>
-            </ol>
-        </div>
-    </div>
+    @include('admin.books.partials.description')
 
     @if(count($errors->all()) > 0)
         <div class="alert alert-danger">
@@ -38,7 +24,7 @@
         </div>
     @endif
 
-    <a href="{{ route('livros.create') }}" class="btn btn-xs btn-default">criar</a>
+    <a href="{{ route('livros.create') }}" class="btn btn-success">Criar</a>
 
     <div class="row">
         <div class="col-lg-12">
@@ -62,10 +48,10 @@
                             <td>{{ $book->description }}</td>
                             <td>{{ $book->isbn }}</td>
                             <td>
-                                <a href="{{ route('livros.edit', $book->id) }}" class="btn btn-xs btn-default">editar</a>
+                                <a href="{{ route('livros.edit', $book->id) }}" class="btn btn-primary">Editar</a>
                                 {{ Form::model($book, ['route' => ['livros.destroy', $book->id]]) }}
                                 {{ Form::hidden('_method', 'DELETE') }}
-                                {{ Form::submit('excluir', ['class' => 'btn btn-xs btn-default']) }}
+                                {{ Form::submit('Excluir', ['class' => 'btn btn-danger']) }}
                                 {{ Form::close() }}
                             </td>
                         </tr>

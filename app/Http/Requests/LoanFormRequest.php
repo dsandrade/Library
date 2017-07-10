@@ -24,22 +24,22 @@ class LoanFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'book' => 'required',
-            'reader' => 'required',
-            'withdrawal' => 'required',
+            'book_id' => 'required',
+            'reader_id' => 'required',
+            'withdrawal_at' => 'required',
             'return_date' => 'required',
-            'user' => 'required',
+            'user_id' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'book.required' => 'O campo livro é obrigatório',
-            'reader.required' => 'O campo leitor é obrigatório',
-            'withdrawal.required' => 'O campo retirado em é obrigatório',
-            'return_date.required' => 'O campo retorna em é obrigatório',
-            'user.required' => 'O campo administrador é obrigatório',
+            'book_id.required' => 'O campo livro é obrigatório',
+            'reader_id.required' => 'O campo leitor é obrigatório',
+            'withdrawal_at.required' => 'O campo data de retirada em é obrigatório',
+            'return_date.required' => 'O campo data de retorno é obrigatório',
+            'user_id.required' => 'O campo responsável é obrigatório',
         ];
     }
 }

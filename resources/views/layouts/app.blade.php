@@ -47,7 +47,7 @@
             <ul class="nav navbar-nav side-nav">
                 @if (Auth::user())
                     <li>
-                        <a href={{ route('clientes.index') }}><i class="fa fa-fw fa-users"></i> Usuarios</a>
+                        <a href={{ route('clientes.index') }}><i class="fa fa-fw fa-users"></i> Usuários</a>
                     </li>
                     <li>
                         <a href={{ route('autores.index') }}><i class="fa fa-fw fa-user"></i> Autores</a>
@@ -65,7 +65,10 @@
                         <a href={{ route('leitores.index') }}><i class="fa fa-fw fa-user-md"></i> Leitores</a>
                     </li>
                     <li>
-                        <a href={{ route('emprestimos.index') }}><i class="fa fa-fw fa-calendar"></i> Emprestimos</a>
+                        <a href={{ route('emprestimos.index') }}><i class="fa fa-fw fa-calendar"></i> Empréstimos</a>
+                    </li>
+                    <li>
+                        <a href={{ route('relatorios.index') }}><i class="fa fa-fw fa-flag"></i> Relatórios</a>
                     </li>
                     <li>
                         <a href="{{ route('logout') }}"

@@ -122,11 +122,12 @@ class LoanController extends Controller
         if($id == 1) {
 
             $this->validate($request, [
-                'id' => 'required|id',
-                'returned_at' => 'required',
+                'id' => 'required',
+                'returned_at' => 'required|returned',
             ], [
                 'id.required' => 'O campo ID é obrigatório',
                 'returned_at.required' => 'O campo data de devolução é obrigatório',
+                'returned_at.returned' => 'Este empréstimo já foi devolvido',
             ]);
 
             $loan = Loan::find($request->id);
@@ -142,7 +143,7 @@ class LoanController extends Controller
         } else {
 
             $this->validate($request, [
-                'id' => 'required|id',
+                'id' => 'required',
                 'canceled_at' => 'required',
             ], [
                 'id.required' => 'O campo ID é obrigatório',

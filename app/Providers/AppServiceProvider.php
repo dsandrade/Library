@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Validator::extend('returned', '\Library\Validators\LoanValidator@returned');
+        Validator::extend('canceled', '\Library\Validators\LoanValidator@canceled');
     }
 
     /**
